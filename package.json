@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
     "image-downloader": "^3.4.1",
     "request": "^2.88.0",

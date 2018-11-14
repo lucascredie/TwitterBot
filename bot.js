@@ -5,6 +5,7 @@ var Twit = require("twit");
 var download = require('image-downloader')
 var fs = require('fs');
 var config = require("./config");
+const chalk = require('chalk');
 
 var T = new Twit(config);
 
@@ -24,13 +25,14 @@ request('http://devhumor.com/popular', function(err, res, body) {
     if(!err && res.statusCode === 200) { //if good request
         
         var $ = cheerio.load(body);
-        console.log("-------------------------------");
+        console.log(chalk.blueBright("---------------START----------------"));
 
         $(".single-media").each(function () {
             array.push($(this).attr('src'));
+            console.log(chalk.yellow($(this).attr('src')));
         });
-
-        console.log(array);
+        
+        // console.log(array);
         randomIndex = Math.floor(Math.random() * (array.length -1)) ;
         // console.log(randomIndex);
 
@@ -60,7 +62,7 @@ request('http://devhumor.com/popular', function(err, res, body) {
                           var params = { status: '', media_ids: [mediaIdStr] }
                      
                           T.post('statuses/update', params, function (err, data, response) {
-                            console.log(data)
+                            console.log(data);
                           })
                         }
                       })
@@ -68,7 +70,7 @@ request('http://devhumor.com/popular', function(err, res, body) {
                 })
 
         }).catch((err) => {
-                console.error(err)
+                console.error(chalk.red(err));
             })
 
         // T.post('statuses/update', { status: url }, function(err, data, response) {
@@ -77,7 +79,7 @@ request('http://devhumor.com/popular', function(err, res, body) {
     }
 
     if(err) {
-        console.log("error");
+        console.log(chalk.red("error"));
     }
 })//end of request
 // //tweeting
