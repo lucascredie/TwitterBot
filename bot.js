@@ -19,6 +19,7 @@ let urlSelection = [
 var randomIndex;
 var array = [];
 
+function tweetMeme() {
 //set time out
 request('http://devhumor.com/popular', function(err, res, body) {
 
@@ -82,7 +83,10 @@ request('http://devhumor.com/popular', function(err, res, body) {
         console.log(chalk.red("error"));
     }
 })//end of request
+}
 // //tweeting
 // T.post('statuses/update', { status: 'Its getting better outside' }, function(err, data, response) {
 //     console.log(data)
 // })
+
+setInterval(tweetMeme, 1000*60*30);
