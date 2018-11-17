@@ -50,24 +50,24 @@ request('http://devhumor.com/popular', function(err, res, body) {
                 console.log('File saved to', filename)
                 var b64picture = fs.readFileSync('./memes/picture.jpg', { encoding: 'base64' })
 
-                // T.post('media/upload', { media_data: b64picture }, function (err, data, response) {
-                //     console.log("UPLOADED!")
-                //     var mediaIdStr = data.media_id_string
-                //     var altText = "yet another meme";
-                //     var meta_params = { media_id: mediaIdStr, alt_text: { text: altText }}
+                T.post('media/upload', { media_data: b64picture }, function (err, data, response) {
+                    console.log("UPLOADED!")
+                    var mediaIdStr = data.media_id_string
+                    var altText = "yet another meme";
+                    var meta_params = { media_id: mediaIdStr, alt_text: { text: altText }}
 
-                //     T.post('media/metadata/create', meta_params, function (err, data, response) {
-                //         if (!err) {
-                //           // now we can reference the media and post a tweet (media will attach to the tweet)
-                //           var params = { status: '', media_ids: [mediaIdStr] }
+                    T.post('media/metadata/create', meta_params, function (err, data, response) {
+                        if (!err) {
+                          // now we can reference the media and post a tweet (media will attach to the tweet)
+                          var params = { status: '', media_ids: [mediaIdStr] }
                      
-                //         //   T.post('statuses/update', params, function (err, data, response) {
-                //         //     console.log(data);
-                //         //   })
-                //         }
-                //       })
+                          T.post('statuses/update', params, function (err, data, response) {
+                            console.log(data);
+                          })
+                        }
+                      })
                       
-                // })
+                })
 
         }).catch((err) => {
                 console.error(chalk.red(err));
@@ -83,6 +83,6 @@ request('http://devhumor.com/popular', function(err, res, body) {
     }
 })//end of request
 // //tweeting
-T.post('statuses/update', { status: 'Its getting better outside' }, function(err, data, response) {
-    console.log(data)
-})
+// T.post('statuses/update', { status: 'Its getting better outside' }, function(err, data, response) {
+//     console.log(data)
+// })
